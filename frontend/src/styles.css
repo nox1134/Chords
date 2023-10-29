@@ -6,7 +6,14 @@ body {
     background-color: rgb(46, 73, 103);
     background-image: linear-gradient(rgb(43, 78, 110), rgb(4, 11, 5) 85%);
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
 }
+
+
 
 h1 {
     font-size: 2em;
@@ -17,6 +24,10 @@ h1 {
 h3 {
     margin-top: 0;
     margin-bottom: 10px;
+}
+.required {
+  color: red; 
+  margin-left: 5px; 
 }
 
 #content {
@@ -108,22 +119,7 @@ a.small-btn {
     line-height: 30px;
     padding: 0 20px;
 }
-html, body {
-    min-height: 100%;
-    margin: 0;
-    padding: 0;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
 
-body {
-    background-color: rgb(46, 73, 103);
-    background-image: linear-gradient(rgb(43, 78, 110), rgb(4, 11, 5) 85%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
-}
 
 #login-container {
     text-align: center;
@@ -159,6 +155,9 @@ h3 {
 
 .login {
     padding: 20px;
+}
+.input__username{
+  background-color:  rgba(0,0,0,.5) ;
 }
 
 .login input[type="text"],
@@ -214,16 +213,8 @@ h3 {
     height: 24px;
 }
 
-.password-hidden input[type="password"] {
-    padding-right: 30px; 
-}
-
-.password-visible input[type="password"] {
-    padding-right: 30px; 
-}
 .input {
     position: relative;
-    background-color: var(--container-color);
     padding: 1.35rem 1.25rem;
     border-radius: .5rem;
     display: flex;
@@ -275,170 +266,6 @@ h3 {
     right: 0;
   }
   
-  .overlay-content ~ .input__lock {
-    color: var(--container-color);
-  }
-  
-  .overlay-content ~ .input__password,
-  .overlay-content ~ .input__password::placeholder {
-    color: var(--text-color);
-  }
-#app-container {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-direction: column;
-        flex-direction: column;
-    height: 100%;
-}
-
-#app-container #artistSection {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-direction: row;
-        flex-direction: row;
-    -ms-flex-negative: 0;
-        flex-shrink: 0;
-    -ms-flex-align: center;
-        align-items: center;
-    color: #ffffff;
-    padding: 10px 20px;
-}
-
-#app-container #artistSection .artistDesc .artistButtons{
-    margin-top: 10px;
-}
-
-#app-container #artistSection #profilePic {
-    height: 150px;
-    box-shadow: 0 0 10px rgba(0,0,0,.3);
-    margin-right: 50px;
-}
-
-#profilePic img {
-    height: 100%;
-}
-
-#app-container #topTrackSection {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-direction: column;
-        flex-direction: column;
-    -ms-flex: 1;
-        flex: 1;
-    padding-top: 8px;
-    min-height: 0;
-    overflow: hidden;
-}
-
-#app-container #topTrackSection .tracksNotFoundMsg {
-    text-align: center;
-    background-color: #282828;
-    width: 100%;
-    padding: 50px 0;
-    color: #ffffff;
-}
-
-#topTrackSectionList {
-    overflow-y: scroll;
-    background-color: #282828;
-    border-bottom: 1px solid #404040;
-    height: 100%;
-}
-
-#topTrackSectionList li {
-    min-height: 50px;
-    background-color: #282828;
-    border-bottom: 1px solid #404040;
-    color: #ffffff;
-    padding: 5px 20px;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-align: center;
-        align-items: center;
-    cursor: pointer;
-}
-#topTrackSection audio {
-    width: 100%;
-}
-
-#topTrackSectionList li:hover {
-    background-color: #181818;
-}
-
-#topTrackSectionList li .trackItem {
-    display: -ms-flexbox;
-    display: flex;
-}
-
-#topTrackSectionList li .trackNum {
-    margin-right: 20px;
-}
-
-#topTrackSectionList li .trackAlbum {
-    font-size: 11px;
-    color: #a0a0a0;
-    margin-top: 5px;
-}
-
-#app-container #relatedArtistSection {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-direction: row;
-        flex-direction: row;
-    -ms-flex-wrap: nowrap;
-        flex-wrap: nowrap;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    -ms-flex-negative: 0;
-        flex-shrink: 0;
-    background-color: #282828;
-    min-height: 60px;
-    color: #ffffff;
-    -ms-flex-align: center;
-        align-items: center;
-    text-align: center;
-}
-
-#app-container #relatedArtistSection .artistNotFoundMsg {
-    margin: 0 auto;
-}
-
-#app-container #relatedArtistSection .artistItem {
-    cursor: pointer;
-    display: -ms-flexbox;
-    display: flex;
-    box-shadow: 0 0 10px rgba(0,0,0,.3);
-    background-color: #181818;
-    color: #ffffff;
-}
-
-#app-container #relatedArtistSection .artistItem:hover {
-    transform: scale(1.2);
-}
-
-#app-container #relatedArtistSection .artistItem:hover .artistDesc {
-    max-width: 150px;
-    padding: 0 10px;
-}
-
-#app-container #relatedArtistSection .artistItem .artistDesc {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-align: center;
-        align-items: center;
-    padding: 0;
-    max-width: 0;
-    overflow: hidden;
-    transition: max-width,padding 300ms linear;
-}
-
-#app-container #relatedArtistSection .artistPic {
-    height: 60px;
-}
-
-#app-container #relatedArtistSection .artistPic img{
-    height: 100%;
-}
 
 body, html{
     width:100%;
@@ -513,6 +340,9 @@ body, html{
     transform:scale(0) translateZ(0);
   }
   
+  
+  
+  /*CHORDS ANIMATED CHARCACTER CODE*/
   .head{
     width: 196px;
     height: 260px;
@@ -525,10 +355,6 @@ body, html{
     margin-left: -98px;
     animation:grow 0.7s 0.4s 1 ease, music-move 1s 3.3s infinite alternate ease-in-out;
     -webkit-animation:grow 0.7s 0.4s 1 ease, music-move 1s 3.3s infinite alternate ease-in-out;
-  /*
-    animation:grow 0.7s 0.4s 1 ease;
-    -webkit-animation:grow 0.7s 0.4s 1 ease;
-  */
     transform-origin: bottom;
     -webkit-transform-origin: bottom;
     -webkit-transform:scale(0) translateZ(0);

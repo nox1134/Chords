@@ -1,11 +1,42 @@
-document.getElementById("login-button").addEventListener("click", function() {
-    var client_id = "84fad8cd66834378b3336e18558015cf"; 
-    var redirect_uri = encodeURIComponent("http://127.0.0.1:5500/frontend/src/welcome.html");
-    var url = "https://accounts.spotify.com/authorize";
-    url += "?response_type=token";
-    url += "&client_id=" + encodeURIComponent(client_id);
-    url += "&redirect_uri=" + redirect_uri;
-    window.location = url;
-    
-}, false);
-  
+
+document.addEventListener('DOMContentLoaded', () => {
+    const loginForm = document.getElementById('login-form');
+    loginForm.addEventListener('submit', (e) => {
+        e.preventDefault(); 
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        if (!username || !password) {
+            alert('Please enter both username and password.');
+            return;
+        }
+        const userData = {
+            username,
+            password
+        };
+        fetch('http://localhost:5000/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userData),
+        })
+        .then((response) => response.text())
+        .then((data) => {
+            if (data.includes('User does not exist.')) {
+                alert('User does not exist, create a new account for free!');
+                window.location = 'http://localhost:5000/signup.html';
+            } 
+            else if(data.includes('Incorrect password')){
+                alert('Password entered is incorrect.');
+                return;
+            }
+            else {
+                window.location = 'http://localhost:5000/landing.html';
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    });
+});

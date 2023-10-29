@@ -19,19 +19,43 @@ mongoose.connect("mongodb://127.0.0.1:27017/Chords",{ useNewUrlParser: true, use
     })
 })
 .catch((err)=>console.log(err));
-
 app.post('/register', async (req, res) => {
-  const { username, password } = req.body;
-  const existingUser = await Sign.findOne({ username });
-  if (existingUser) {
-    return res.status(400).json({ message: 'Username already in use' });
-  }
-  const newSign = new Sign({ username, password });
-  try {
-    await newSign.save();
-    res.status(201).json({ message: 'User registered successfully' });
-  } catch (error) {
-    console.error('Error during registration:', error);
-    res.status(500).json({ message: 'Registration failed' });
-  }
+    const { username, password } = req.body;
+
+    if (!username || !password) {
+        res.status(400).send('Empty credentials');
+        return;
+    }
+
+    const existingUser = await Sign.findOne({ username });
+    if (existingUser) {
+        res.status(400).send('Username already in use');
+    } else {
+        const newSign = new Sign({ username, password });
+        try {
+            await newSign.save();
+            res.status(201).send('User registered successfully!');
+            
+        } catch (error) {
+            console.error('Error during registration:', error);
+            res.status(500).send('Registration failed');
+        }
+    }
+});
+
+
+app.post('/login', async (req, res) => {
+    const { username, password } = req.body;
+    const existingUser = await Sign.findOne({ username });
+
+    if (existingUser) {
+        if (existingUser.password === password) {
+            res.status(200).send('Login successful');
+        } else {
+            res.status(400).send('Incorrect password');
+
+        }
+    } else {
+        res.status(404).send('User does not exist');
+    }
 });

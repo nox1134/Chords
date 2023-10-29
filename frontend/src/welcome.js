@@ -1,36 +1,36 @@
 document.addEventListener('DOMContentLoaded', () => {
     const registrationForm = document.getElementById('registration-form');
     registrationForm.addEventListener('submit', (e) => {
-        e.preventDefault();
+        e.preventDefault(); 
 
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
-        const confirmPassword = document.getElementById('confirmpassword').value;
 
-        if (!username || !password || !confirmPassword) {
-            alert('Please fill in all required fields.');
-        } else if (password !== confirmPassword) {
-            alert('Password and Confirm Password do not match.');
-        } else {
-            const userData = {
-                username,
-                password,
-            };
+        const userData = {
+            username,
+            password
+        };
 
-            fetch('http://localhost:5000/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(userData),
-            })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data.message);
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-        }
+        fetch('http://localhost:5000/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userData),
+        })
+        .then((response) => response.text())
+        .then((data) => {
+            if (data.includes('Username already in use')) {
+                alert('Username already in use. Please choose a different username.');
+            } else if (data.includes('User registered successfully')) {
+                alert('User registered successfully!');
+                window.location = 'http://localhost:5000/login.html';
+            } else {
+                alert('Registration failed. Please try again later.');
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
     });
 });
